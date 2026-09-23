@@ -42,7 +42,7 @@
 		(cond
 		  ((eq system-type 'windows-nt) (start-process "*Messages*" nil "powershell" "-c" (format "(New-Object Media.SoundPlayer '%s').PlaySync();" absolute-path)))
 			((eq system-type 'darwin) (start-process "*Messages*" nil "afplay" absolute-path))
-			((t) (start-process "*Messages*" nil "aplay" absolute-path))))) ;Linux
+			(t (start-process "*Messages*" nil "aplay" absolute-path))))) ;Linux
 
 (defun typewriter-type ()
   "Make the sound of the printing element hitting the paper."
@@ -58,7 +58,7 @@
   "Added to `post-command-hook' to decide what sound to play."
   (unless (minibufferp)
     (when (not (eql (buffer-size) typewriter-last-size))
-			(if (and (eq (char-before (point)) ?\n) (> (buffer-size) last-size))
+			(if (and (eq (char-before (point)) ?\n) (> (buffer-size) typewriter-last-size))
         (typewriter-newline)
 				(typewriter-type)))
 		(setf typewriter-last-size (buffer-size))))
