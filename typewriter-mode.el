@@ -58,7 +58,7 @@
   "Added to `post-command-hook' to decide what sound to play."
   (unless (minibufferp)
     (when (not (eql (buffer-size) typewriter-last-size))
-			(if (memq this-command '(newline evil-open-above evil-open-below))
+			(if (memq this-command '(newline evil-open-above evil-open-below org-return))
         (typewriter-newline)
 				(typewriter-type)))
 		(setf typewriter-last-size (buffer-size))))
